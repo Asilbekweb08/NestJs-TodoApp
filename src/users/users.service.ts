@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateDto } from './dto/update-user.dto';
+import { LoginDto } from './dto/login-user.dto';
 
 @Injectable()
 export class UserService {
@@ -25,4 +26,15 @@ export class UserService {
     this.users[userIndex] = updatedUser;
     return updatedUser;
   }
+  login(dto:LoginDto){
+   const user = this.users.find(u=>u.name=dto.name)
+    if(!user){
+         return "user yuqq"
+    }
+    if(user.password!==dto.password){
+        throw new Error('Parol hato')
+    }
+    return (dto.name)
+  }
+
 }
